@@ -79,9 +79,69 @@ contract Arbitrage is Test {
         /**
          * Please add your solution below
          */
-        /**
-         * Please add your solution above
-         */
+        // 定義交換的路徑
+        address[] memory pathBtoA = new address[](2);
+        pathBtoA[0] = address(tokenB);
+        pathBtoA[1] = address(tokenA);
+        
+        address[] memory pathAtoD = new address[](2);
+        pathAtoD[0] = address(tokenA);
+        pathAtoD[1] = address(tokenD);
+        
+        address[] memory pathDtoC = new address[](2);
+        pathDtoC[0] = address(tokenD);
+        pathDtoC[1] = address(tokenC);
+        
+        address[] memory pathCtoB = new address[](2);
+        pathCtoB[0] = address(tokenC);
+        pathCtoB[1] = address(tokenB);
+        
+        // 執行交換
+
+        router.swapExactTokensForTokens(
+            5 ether, // amountIn
+            0, // amountOutMin, 設為 0 假定交易不會失敗
+            pathBtoA,
+            address(arbitrager),
+            block.timestamp + 120 // deadline
+        );
+        
+        uint256 tokenABalance = tokenA.balanceOf(address(arbitrager));
+        tokenA.approve(address(router), tokenABalance);
+
+        router.swapExactTokensForTokens(
+            tokenABalance,
+            0,
+            pathAtoD,
+            address(arbitrager),
+            block.timestamp + 120
+        );
+
+        uint256 tokenDBalance = tokenD.balanceOf(address(arbitrager));
+        tokenD.approve(address(router), tokenDBalance);       
+    
+        router.swapExactTokensForTokens(
+            tokenDBalance,
+            0,
+            pathDtoC,
+            address(arbitrager),
+            block.timestamp + 120
+        );
+
+        uint256 tokenCBalance = tokenC.balanceOf(address(arbitrager));
+        tokenC.approve(address(router), tokenCBalance);
+
+        router.swapExactTokensForTokens(
+            tokenCBalance,
+            0,
+            pathCtoB,
+            address(arbitrager),
+            block.timestamp + 120
+        );
+
+        // /**
+        //  * Please add your solution above
+        //  */
         uint256 tokensAfter = tokenB.balanceOf(arbitrager);
         assertGt(tokensAfter, 20 ether);
         console.log("After Arbitrage tokenB Balance: %s", tokensAfter);
