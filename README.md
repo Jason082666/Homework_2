@@ -7,8 +7,11 @@ Please complete the report problem below:
 > Solution
 
 step 1 : B -> A , amount in => 5.0000 , amount out => 5.655321988655321988
+
 step 2 : A -> D , amount in => 5.655321988655321988 , amount out => 2.458781317097933552
+
 step 3 : D -> C , amount in => 2.458781317097933552 , amount out => 5.088927293301515695
+
 step 4 : C -> B , amount in => 5.088927293301515695 , amount out => 20.129888944077446732
 
 ## Problem 2
