@@ -43,4 +43,4 @@ for path in itertools.permutations(tokens, 3):  # 只考慮交換路徑為 3 的
         best_path = path
 
 # 輸出結果
-print(f"Best path: {'->'.join(best_path)}, tokenB balance={best_balance:.6f}")
+print(f"path: {'->'.join(best_path)}, tokenB balance={best_balance:.6f}")
