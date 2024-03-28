@@ -98,6 +98,7 @@ contract Arbitrage is Test {
         
         // 執行交換
 
+        // B -> A
         router.swapExactTokensForTokens(
             5 ether, // amountIn
             0, // amountOutMin, 設為 0 假定交易不會失敗
@@ -108,7 +109,8 @@ contract Arbitrage is Test {
         
         uint256 tokenABalance = tokenA.balanceOf(address(arbitrager));
         tokenA.approve(address(router), tokenABalance);
-
+        console.log("b->a", tokenABalance);
+        // A -> D
         router.swapExactTokensForTokens(
             tokenABalance,
             0,
@@ -116,10 +118,11 @@ contract Arbitrage is Test {
             address(arbitrager),
             block.timestamp + 120
         );
-
+        
         uint256 tokenDBalance = tokenD.balanceOf(address(arbitrager));
         tokenD.approve(address(router), tokenDBalance);       
-    
+    console.log("a->d", tokenDBalance);
+        // D -> C
         router.swapExactTokensForTokens(
             tokenDBalance,
             0,
@@ -130,7 +133,8 @@ contract Arbitrage is Test {
 
         uint256 tokenCBalance = tokenC.balanceOf(address(arbitrager));
         tokenC.approve(address(router), tokenCBalance);
-
+        console.log("d->c", tokenCBalance);
+        // C -> B
         router.swapExactTokensForTokens(
             tokenCBalance,
             0,
