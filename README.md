@@ -26,8 +26,8 @@ Uniswap V2 allows traders to specify a maximum slippage they are willing to acce
 
 ### function & example:
 
-The price of a trade is determined by the product of the quantities of the two tokens in the liquidity pool, according to the formula x _ y = k, where x and y are the quantities of the two tokens, and k is a constant.
-Supposed we have a liquidity pool with 10,000 units of Token A and 5,000 units of Token B, so k = 10000 _ 5000 = 50,000,000, You want to trade 1,000 units of Token A for Token B. So the amount_out will be : 5000 - 50000000 / (10000 + 1000) = 5000 - 4545.45 = 4545.55
+The price of a trade is determined by the product of the quantities of the two tokens in the liquidity pool, according to the formula x * y = k, where x and y are the quantities of the two tokens, and k is a constant.
+Supposed we have a liquidity pool with 10,000 units of Token A and 5,000 units of Token B, so k = 10000 * 5000 = 50,000,000, You want to trade 1,000 units of Token A for Token B. So the amount_out will be : 5000 - 50000000 / (10000 + 1000) = 5000 - 4545.45 = 4545.55
 
 So, you expect to receive 454.55 units of Token B for your 1,000 units of Token A.
 If the expected price was 1 Token A for 0.5 Token B (based on the initial pool state), the expected amount of Token B for 1,000 units of Token A would be 500.
